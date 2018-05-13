@@ -11,25 +11,25 @@ import { connect } from 'react-redux';
 
 
 class App extends React.Component {
-  render () {
-      console.log(this.props)
+    render() {
+        console.log(this.props)
 
-    return (
-        <div>
-            <h1> APP - LOADED </h1>
-            <ComponentTodo setName={this.props.actions.profile.setName} />
-            <ComponentControl  />
-        </div>
-    );
-  }
+        return (
+            <div>
+                <h1> APP - xd </h1>
+                <ComponentTodo setName={this.props.actions.profile.setName} />
+                <ComponentControl />
+            </div>
+        );
+    }
 }
 
 
 //==================================================================
 // first parameter is mapStateToProps
 // second parameter is mapDispatchToProps
-function mapStateToProps (store) {
+function mapStateToProps(store) {
     return { store }
-    }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
