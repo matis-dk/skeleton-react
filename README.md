@@ -1,3 +1,3 @@
-# Webpack Boilerplate Development
+# Minimal React and Redux starterpack
 
-Let's do it!
+Let's go!
