@@ -1,3 +1,3 @@
-# Minimal React and Redux starterpack
+# Minimal React starterpack
 
 Let's go!
