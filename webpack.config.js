@@ -120,8 +120,19 @@ if (process.env.NODE_ENV == 'development') {
         contentBase: './dist',                             // Which root-folder devServer should serve
         watchContentBase: true,
         hot: true,
-        stats: { children: false },                         // HMR
-        stats: 'errors-only'
+        stats: {
+            assets: false,
+            hash: false,
+            modules: false,
+            publicPath: false,
+            entrypoints: false,
+            version: false,
+            warnings: true,
+            colors: true, 
+            children: false,
+            chunks: false,
+            chunkOrigins: false 
+        }
     }
 }
 
