@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --progress",
-    "serve": "cross-env NODE_ENV=development webpack-dev-server"
+    "serve": "cross-env NODE_ENV=development webpack-dev-server --colors"
   },
   "repository": "",
   "author": "",
@@ -16,9 +16,13 @@
     "@babel/polyfill": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
+    "@emotion/babel-preset-css-prop": "^10.0.6",
+    "@emotion/core": "^10.0.6",
+    "@emotion/styled": "^10.0.6",
     "imagemin": "^6.0.0",
     "react": "^16.3.2",
-    "react-dom": "^16.3.2"
+    "react-dom": "^16.3.2",
+    "react-spring": "^7.2.10"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
