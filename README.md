@@ -1,3 +1,3 @@
 # Minimal React starterpack
 
-Let's go!
+![GitHub Logo](https://images.unsplash.com/photo-1494178270175-e96de2971df9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1872&q=80)
