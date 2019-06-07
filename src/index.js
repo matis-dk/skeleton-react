@@ -6,6 +6,7 @@ import ReactDOM from "react-dom";
 import App from "./js/app";
 
 // SCSS STYLES
+import "./style/style.scss"
 
 // HMR
 if (module.hot) {

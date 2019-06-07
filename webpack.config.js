@@ -1,25 +1,18 @@
 // Webpack
-var path = require("path");
-var webpack = require("webpack");
+const path = require("path");
+const webpack = require("webpack");
 
 // Plugins
-var HtmlWebpackPlugin = require("html-webpack-plugin");
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var CleanWebpackPlugin = require("clean-webpack-plugin");
-var BrowserSyncPlugin = require("browser-sync-webpack-plugin");
-
-// Postcss Config
-require("./postcss.config.js");
-
-const env =
-  process.env.NODE_ENV == "development" ? "development" : "production";
-const envBoolean = process.env.NODE_ENV == "development" ? true : false;
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const BrowserSyncPlugin = require("browser-sync-webpack-plugin");
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 /* ------------------------------------------------------ */
 // COMMON
 
 const config = {
-  mode: env,
+  mode: process.env.NODE_ENV,
   entry: {
     bundle: "./src/index.js"
   },
@@ -36,16 +29,24 @@ const config = {
         use: {
           loader: "babel-loader",
           options: {
-            presets: ["@babel/preset-env"]
+            presets: ["@babel/preset-env"],
+            plugins: ['@babel/plugin-proposal-object-rest-spread']
           }
         }
       },
       {
         test: /\.(scss|sass|css)$/,
-        use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
-          use: ["css-loader", "postcss-loader", "sass-loader"]
-        })
+        use: [
+            {
+              loader: MiniCssExtractPlugin.loader,
+              options: {
+                hmr: process.env.NODE_ENV === 'development',
+              },
+            },
+            {loader: "css-loader"},
+            {loader: "postcss-loader"},
+            {loader: "sass-loader"}
+          ],
       },
       {
         test: /\.html$/,
@@ -91,11 +92,10 @@ const config = {
     ]
   },
   plugins: [
-    new CleanWebpackPlugin(["dist"]), // Cleaning 'dist' folder
-    new ExtractTextPlugin({
-      // Extracting css to production
+    new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin({
       filename: "css/style.[chunkhash].css",
-      disable: envBoolean
+      disable: process.env.NODE_ENV === "development"
     }),
     new HtmlWebpackPlugin({
       template: "src/index.html" // Duplicating and injecting script tags for our output files
@@ -115,14 +115,15 @@ if (process.env.NODE_ENV == "development") {
         proxy: "http://localhost:8080/"
       },
       {
-        reload: false // Reload browsersync on all devices
+        reload: false
       }
     ),
-    new webpack.NamedModulesPlugin(), // Make it easier to see which dependencies are being patched
-    new webpack.HotModuleReplacementPlugin() // HMR plugin
+    new webpack.HotModuleReplacementPlugin()
   );
 
-  config.devtool = "source-map";
+  config.devtool = process.env.NODE_ENV == "development" 
+    ? "cheap-eval-source-map"
+    : "source-map"
 
   config.devServer = {
     historyApiFallback: true,
